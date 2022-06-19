@@ -39,4 +39,28 @@ public class GetPostTest {
         then().
                 statusCode(201);
     }
+    @Test
+    public void putTest(){
+        baseURI = "https://reqres.in/api/";
+        JSONObject request= new JSONObject();
+        request.put("name","morpheus");
+        request.put("job","zion resident");
+        System.out.println(request.toJSONString());
+        given().
+                body(request.toJSONString()).
+        when().
+                post("/api/users").
+        then().
+                statusCode(201).
+                log().all();
+    }
+    @Test
+    public void deleteTest(){
+        baseURI = "https://reqres.in/api/";
+        given().
+                delete("/api/users/2").
+        then().
+                statusCode(204)
+                .log().all();
+    }
 }
