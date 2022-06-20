@@ -18,6 +18,5 @@ public class validateJSONSchema {
                 body(matchesJsonSchemaInClasspath("schema.json")).
                 body("data[2].first_name", equalTo("Tobias")).
                 body("data.first_name", hasItems("Lindsay", "Michael"));
-
     }
 }
