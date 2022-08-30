@@ -22,7 +22,7 @@ public class TestOne {
         baseURI = "https://reqres.in/api";
         given().
                 get("users?page=2").
-        then().
+        then(). 
                 statusCode(200).
                 body("data.id[1]", equalTo(8));
     }
