@@ -10,8 +10,10 @@
 
 # Maven
 log/
-target/
-target/
+target/generated-test-sources
+target/test-classes
+target/maven-status
+target/surefire-reports
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
