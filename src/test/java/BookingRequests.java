@@ -2,6 +2,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -22,6 +23,7 @@ public class BookingRequests{
         responseSpecification.statusCode(200);
         responseSpecification.contentType(ContentType.JSON);
         responseSpecification.log().all();
+        responseSpecification.time(Matchers.lessThan(3000L));
     }
 
     @Test
