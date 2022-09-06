@@ -1,12 +1,14 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
 public class BookingRequests{
     RequestSpecification requestSpecification;
+    ResponseSpecification responseSpecification;
     @BeforeClass
     public void setupRequestSpecification(){
         requestSpecification = RestAssured.given();
@@ -16,14 +18,22 @@ public class BookingRequests{
                 .baseUri("https://restful-booker.herokuapp.com/")
                 .basePath("booking")
                 .contentType(ContentType.JSON);
+
+        responseSpecification = RestAssured.expect();
+        responseSpecification.statusCode(200);
+        responseSpecification.contentType(ContentType.JSON);
+        responseSpecification.log().all();
+        responseSpecification.time(Matchers.lessThan(3000L));
     }
 
     @Test
     public void createBooking(){
-        RestAssured.given().spec(requestSpecification)
-                .basePath("booking")
-                .contentType(ContentType.JSON)
-                .body("{\n" +
+        RestAssured
+                .given()
+                    .spec(requestSpecification)
+                    .basePath("booking")
+                    .contentType(ContentType.JSON)
+                    .body("{\n" +
                         "    \"firstname\" : \"Jim\",\n" +
                         "    \"lastname\" : \"Brown\",\n" +
                         "    \"totalprice\" : 111,\n" +
@@ -34,8 +44,10 @@ public class BookingRequests{
                         "    },\n" +
                         "    \"additionalneeds\" : \"Breakfast\"\n" +
                         "}")
-                .post()
-                .then();
+                .when()
+                    .post()
+                .then()
+                   .spec(responseSpecification);
     }
     @Test
     public void updateBooking(){
@@ -55,9 +67,10 @@ public class BookingRequests{
                         "    \"additionalneeds\" : \"Breakfast\"\n" +
                         "}")
                 .when()
-                .put()
+                    .put()
                 .then()
-                .log().all()
-                .statusCode(200);
+                    .log()
+                    .all()
+                    .spec(responseSpecification);
     }
 }
