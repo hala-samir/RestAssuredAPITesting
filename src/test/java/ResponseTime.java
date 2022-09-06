@@ -41,5 +41,7 @@ public class ResponseTime {
                         .both(Matchers.lessThan(4000L))
                         .and(Matchers.greaterThan(1000L))
                 );
+        response.then().time(Matchers.lessThan(3000L), TimeUnit.MILLISECONDS);
+
     }
 }
