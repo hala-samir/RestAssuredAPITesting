@@ -1,6 +1,8 @@
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.hamcrest.Matchers;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 public class TestBase {
@@ -9,7 +11,6 @@ public class TestBase {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com/";
         RestAssured.basePath = "booking";
         System.out.println("in setup");
-        RequestSpecification requestSpecification = RestAssured.given().log().all();
-        ResponseSpecification responseSpecification = RestAssured.expect().statusCode(200);
     }
+
 }

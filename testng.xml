@@ -3,7 +3,7 @@
 <suite name="TestSuite" >
     <test name="APITest">
         <classes>
-            <class name="GetBookings"/>
+            <class name="GetBookingsUsingTestBase"/>
         </classes>
     </test>
 </suite>
