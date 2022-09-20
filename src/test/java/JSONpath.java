@@ -13,5 +13,10 @@ public class JSONpath {
         System.out.println(firstname);
         String name = jpath.get("firstname");
         System.out.println(name);
+        System.out.println((Object) jpath.get("$"));
+        System.out.println(jpath.getString("$"));
+        System.out.println((Object) jpath.get());
+        System.out.println(jpath.getString(""));
+
     }
 }
